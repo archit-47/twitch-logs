@@ -2,7 +2,7 @@
 
 ## Using web sockets to log twitch channel messages.
 
-<h4> Go to [Link](https://twitchapps.com/tmi/) to request an auth token for your twitch account. </h4>
+Go to [Link](https://twitchapps.com/tmi/) to request an auth token for your twitch account. 
 
 Clone this github repo and create a new file config.py
 
