@@ -44,6 +44,7 @@ class twitchchat:
     		
 
 def main():
+	config.checklive() #Remove this line (added from twitch api in config.py)
 	streamer=twitchchat(config.channel)
 	streamer.setsocket()
 	streamer.startlogs()
