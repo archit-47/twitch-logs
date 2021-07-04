@@ -19,10 +19,17 @@ class twitchchat:
 		self.sock.send(f"NICK {self.nickname}\n".encode('utf-8'))
 		self.sock.send(f"JOIN {self.channel}\n".encode('utf-8'))
 
-	def startlogs(self):
+	def startlogs(self,time):
 		now = datetime.now()
 		# dd/mm/YY H:M:S
 		dt_string = now.strftime("%d_%m_%Y")
+		if time is not None:
+			logging.basicConfig(filename=dt_string+self.channel[1:]+'.log',encoding='utf-8',level=logging.DEBUG,format='%(message)s')
+			logging.info("StartTime: "+str(time))
+		
+		for handler in logging.root.handlers[:]:
+			logging.root.removeHandler(handler)
+		
 		logging.basicConfig(filename=dt_string+self.channel[1:]+'.log',encoding='utf-8',level=logging.DEBUG,format='%(asctime)s\t%(message)s')
 		self.count=0
 		print("Started Logging!!")
@@ -44,10 +51,10 @@ class twitchchat:
     		
 
 def main():
-	config.checklive() #Remove this line (added from twitch api in config.py)
+	start_time = config.checklive() #Remove this line (added from twitch api in config.py)
 	streamer=twitchchat(config.channel)
 	streamer.setsocket()
-	streamer.startlogs()
+	streamer.startlogs(start_time)
 
 if __name__ == "__main__":
 	main()
